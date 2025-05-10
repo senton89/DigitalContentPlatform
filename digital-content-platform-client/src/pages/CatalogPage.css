@@ -1,0 +1,79 @@
+/* src/pages/CatalogPage.css */
+.catalog-page {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .catalog-page h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+  }
+  
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .empty-catalog {
+    text-align: center;
+    padding: 40px;
+  }
+  
+  .empty-catalog button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .empty-catalog button:hover {
+    background-color: #0056b3;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+  }
+  
+  .pagination-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination-button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .pagination-info {
+    font-size: 1em;
+    color: #333;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    font-size: 1.2em;
+    padding: 40px;
+    color: #666;
+  }
+  
+  .error {
+    color: red;
+  }

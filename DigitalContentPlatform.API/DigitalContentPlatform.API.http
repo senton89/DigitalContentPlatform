@@ -1,0 +1,6 @@
+@DigitalContentPlatform.API_HostAddress = http://localhost:5268
+
+GET {{DigitalContentPlatform.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,177 @@
+import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import {MockStore} from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import Dashboard from '../../../components/admin/Dashboard';
+import { fetchDashboardStats } from '../../../store/slices/adminSlice';
+import {configureStore} from "@reduxjs/toolkit";
+
+// Мокаем recharts, так как он использует DOM API, которые не доступны в тестовой среде
+jest.mock('recharts', () => ({
+    BarChart: () => <div data-testid="bar-chart" />,
+    Bar: () => <div />,
+    XAxis: () => <div />,
+    YAxis: () => <div />,
+    CartesianGrid: () => <div />,
+    Tooltip: () => <div />,
+    Legend: () => <div />,
+    ResponsiveContainer: ({ children }: { children: React.ReactNode }) => (
+        <div data-testid="responsive-container">{children}</div>
+    ),
+}));
+
+// // Мокаем redux-thunk
+// const middlewares = [thunk];
+// const mockStore = configureStore(middlewares);
+
+// Мокаем действия Redux
+jest.mock('../../../store/slices/adminSlice', () => ({
+    fetchDashboardStats: jest.fn() as jest.Mock,
+}));
+
+describe('Dashboard Component', () => {
+    let store: any;
+
+    const mockDashboardStats = {
+        totalUsers: 100,
+        totalItems: 50,
+        totalOrders: 30,
+        totalRevenue: 1500.75,
+        userRegistrationsByMonth: [
+            { label: 'Jan 2023', value: 10 },
+            { label: 'Feb 2023', value: 15 },
+        ],
+        salesByMonth: [
+            { label: 'Jan 2023', value: 5 },
+            { label: 'Feb 2023', value: 8 },
+        ],
+        topCategories: [
+            { categoryName: 'Category 1', itemCount: 20, orderCount: 15, revenue: 750.50 },
+            { categoryName: 'Category 2', itemCount: 15, orderCount: 10, revenue: 500.25 },
+        ],
+    };
+
+    beforeEach(() => {
+        store = configureStore({
+            reducer: {
+                admin: (state = {
+                    dashboardStats: mockDashboardStats,
+                    loading: false,
+                    error: null
+                }, action) => state
+            }
+        });
+
+        // Мокаем успешный ответ от fetchDashboardStats
+        (fetchDashboardStats as unknown as jest.Mock).mockReturnValue({
+            type: 'admin/fetchDashboardStats/fulfilled',
+            payload: mockDashboardStats,
+        });
+
+        jest.clearAllMocks();
+    });
+
+    test('renders dashboard with stats cards', async () => {
+        render(
+            <Provider store={store}>
+                <Dashboard />
+            </Provider>
+        );
+
+        // Проверяем, что fetchDashboardStats был вызван
+        expect(fetchDashboardStats).toHaveBeenCalled();
+
+        // Проверяем, что статистические карточки отображаются
+        expect(screen.getByText('Total Users')).toBeInTheDocument();
+        expect(screen.getByText('100')).toBeInTheDocument();
+
+        expect(screen.getByText('Total Items')).toBeInTheDocument();
+        expect(screen.getByText('50')).toBeInTheDocument();
+
+        expect(screen.getByText('Total Orders')).toBeInTheDocument();
+        expect(screen.getByText('30')).toBeInTheDocument();
+
+        expect(screen.getByText('Total Revenue')).toBeInTheDocument();
+        expect(screen.getByText('$1500.75')).toBeInTheDocument();
+    });
+
+    test('renders charts', async () => {
+        render(
+            <Provider store={store}>
+                <Dashboard />
+            </Provider>
+        );
+
+        // Проверяем, что заголовки графиков отображаются
+        expect(screen.getByText('User Registrations by Month')).toBeInTheDocument();
+        expect(screen.getByText('Sales by Month')).toBeInTheDocument();
+
+        // Проверяем, что компоненты графиков отображаются
+        expect(screen.getAllByTestId('responsive-container').length).toBe(2);
+        expect(screen.getAllByTestId('bar-chart').length).toBe(2);
+    });
+
+    test('renders top categories table', async () => {
+        render(
+            <Provider store={store}>
+                <Dashboard />
+            </Provider>
+        );
+
+        // Проверяем, что таблица топ категорий отображается
+        expect(screen.getByText('Top Categories')).toBeInTheDocument();
+        
+        // Проверяем заголовки таблицы
+        expect(screen.getByText('Category')).toBeInTheDocument();
+        expect(screen.getByText('Items')).toBeInTheDocument();
+        expect(screen.getByText('Orders')).toBeInTheDocument();
+        expect(screen.getByText('Revenue')).toBeInTheDocument();
+        
+        // Проверяем данные таблицы
+        expect(screen.getByText('Category 1')).toBeInTheDocument();
+        expect(screen.getByText('20')).toBeInTheDocument();
+        expect(screen.getByText('15')).toBeInTheDocument();
+        expect(screen.getByText('$750.50')).toBeInTheDocument();
+        
+        expect(screen.getByText('Category 2')).toBeInTheDocument();
+        expect(screen.getByText('10')).toBeInTheDocument();
+        expect(screen.getByText('$500.25')).toBeInTheDocument();
+    });
+
+    test('shows loading state', async () => {
+        store = mockStore({
+            admin: {
+                dashboardStats: null,
+                loading: true,
+                error: null,
+            },
+        });
+
+        render(
+            <Provider store={store}>
+                <Dashboard />
+            </Provider>
+        );
+
+        expect(screen.getByText('Loading dashboard stats...')).toBeInTheDocument();
+    });
+
+    test('shows error state', async () => {
+        store = mockStore({
+            admin: {
+                dashboardStats: null,
+                loading: false,
+                error: 'Failed to load dashboard stats',
+            },
+        });
+
+        render(
+            <Provider store={store}>
+                <Dashboard />
+            </Provider>
+        );
+
+        expect(screen.getByText('Error: Failed to load dashboard stats')).toBeInTheDocument();
+    });
+});

@@ -1,0 +1,54 @@
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const CompressionPlugin = require('compression-webpack-plugin');
+
+module.exports = {
+  webpack: {
+    configure: (webpackConfig, { env, paths }) => {
+      // Анализ бандла только в режиме разработки
+      if (env === 'development') {
+        webpackConfig.plugins.push(
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'server',
+            analyzerPort: 8888,
+            openAnalyzer: true,
+          })
+        );
+      }
+
+      // Сжатие файлов в режиме продакшн
+      if (env === 'production') {
+        webpackConfig.plugins.push(
+          new CompressionPlugin({
+            algorithm: 'gzip',
+            test: /\.(js|css|html|svg)$/,
+            threshold: 10240,
+            minRatio: 0.8,
+          })
+        );
+      }
+
+      // Разделение кода на чанки
+      webpackConfig.optimization = {
+        ...webpackConfig.optimization,
+        splitChunks: {
+          chunks: 'all',
+          name: false,
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name(module) {
+                // Получаем имя пакета из node_modules
+                const packageName = module.context.match(
+                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+                )[1];
+                return `npm.${packageName.replace('@', '')}`;
+              },
+            },
+          },
+        },
+      };
+
+      return webpackConfig;
+    },
+  },
+};

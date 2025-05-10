@@ -1,0 +1,27 @@
+// src/pages/CreateItemPage.tsx
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import DigitalItemForm from '../components/catalog/DigitalItemForm';
+import ProtectedRoute from '../components/auth/ProtectedRoute';
+import './CreateItemPage.css';
+
+const CreateItemPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSuccess = () => {
+    navigate('/profile');
+  };
+
+  return (
+    <div className="create-item-page">
+      <h1>Create New Digital Content</h1>
+      <DigitalItemForm onSuccess={handleSuccess} />
+    </div>
+  );
+};
+
+export default () => (
+  <ProtectedRoute>
+    <CreateItemPage />
+  </ProtectedRoute>
+);

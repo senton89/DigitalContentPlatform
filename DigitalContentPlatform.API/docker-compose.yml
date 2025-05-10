@@ -1,0 +1,43 @@
+﻿version: '3.8'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: DigitalContentPlatform.API/Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Database=digitalcontent;Username=postgres;Password=postgres
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT__Secret=your_secret_key_here
+      - JWT__Issuer=digitalcontentplatform
+      - JWT__Audience=digitalcontentplatform
+      - FileStorage__BasePath=/app/wwwroot/uploads
+    volumes:
+      - uploads_data:/app/wwwroot/uploads
+
+  client:
+    build:
+      context: ./digital-content-platform-client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=digitalcontent
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  uploads_data:

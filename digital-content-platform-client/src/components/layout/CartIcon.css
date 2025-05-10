@@ -1,0 +1,31 @@
+/* src/components/layout/CartIcon.css */
+.cart-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    margin-left: 15px;
+}
+
+.cart-icon {
+    font-size: 1.5em;
+    color: #333;
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7em;
+    font-weight: bold;
+}

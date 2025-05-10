@@ -1,0 +1,45 @@
+import axiosInstance from './axiosConfig';
+import { UserDto, UpdateRoleDto, DashboardStats } from '../types/admin';
+import { PagedResult, DigitalItemDto } from '../types/digitalItem';
+
+const API_URL = '/Admin';
+
+export const adminApi = {
+    // Управление пользователями
+    getUsers: async (page: number = 1, pageSize: number = 10): Promise<PagedResult<UserDto>> => {
+        const response = await axiosInstance.get(`${API_URL}/users?page=${page}&pageSize=${pageSize}`);
+        response.data.items = response.data.items.$values;
+        return response.data;
+    },
+
+    getUserById: async (id: string): Promise<UserDto> => {
+        const response = await axiosInstance.get(`${API_URL}/users/${id}`);
+        return response.data;
+    },
+
+    updateUserRole: async (id: string, role: string): Promise<void> => {
+        await axiosInstance.put(`${API_URL}/users/${id}/role`, { role });
+    },
+
+    deleteUser: async (id: string): Promise<void> => {
+        await axiosInstance.delete(`${API_URL}/users/${id}`);
+    },
+
+    // Управление контентом
+    getAllItems: async (page: number = 1, pageSize: number = 10): Promise<PagedResult<DigitalItemDto>> => {
+        const response = await axiosInstance.get(`${API_URL}/items?page=${page}&pageSize=${pageSize}`);
+        return response.data;
+    },
+
+    deleteItem: async (id: string): Promise<void> => {
+        await axiosInstance.delete(`${API_URL}/items/${id}`);
+    },
+
+    // Аналитика
+    getDashboardStats: async (): Promise<DashboardStats> => {
+        const response = await axiosInstance.get(`${API_URL}/dashboard`);
+        response.data.topCategories = response.data.topCategories.$values;
+        response.data.salesByMonth = response.data.salesByMonth.$values;
+        return response.data;
+    }
+};

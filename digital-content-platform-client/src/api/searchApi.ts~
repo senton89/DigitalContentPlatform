@@ -1,0 +1,18 @@
+import axiosInstance from './axiosConfig';
+import { FilterParams } from '../types/search';
+import { PagedResult, DigitalItemDto } from '../types/digitalItem';
+
+const API_URL = '/search';
+
+export const searchApi = {
+    search: async (query: string, page: number = 1, pageSize: number = 10): Promise<PagedResult<DigitalItemDto>> => {
+        const response = await axiosInstance.get(`${API_URL}?query=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}`);
+        return response.data;
+    },
+    
+    filter: async (filterParams: FilterParams): Promise<PagedResult<DigitalItemDto>> => {
+        const response = await axiosInstance.post(`${API_URL}/filter`, filterParams);
+        response.data.items = response.data.items.$values;
+        return response.data;
+    }
+};
