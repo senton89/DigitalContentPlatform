@@ -41,9 +41,9 @@ const UserProfilePage: React.FC = () => {
         return (
             <div className="profile-page">
                 <div className="profile-container">
-                    <h1>User Profile</h1>
-                    <p>Please log in to view your profile.</p>
-                    <Link to="/login" className="login-button">Login</Link>
+                    <h1>Профиль пользователя</h1>
+                    <p>Пожалуйста, войдите, чтобы просмотреть ваш профиль.</p>
+                    <Link to="/login" className="login-button">Войти</Link>
                 </div>
             </div>
         );
@@ -53,8 +53,8 @@ const UserProfilePage: React.FC = () => {
         <div className="profile-page">
             <div className="profile-container">
                 <div className="profile-header">
-                    <h1>My Profile</h1>
-                    <button onClick={handleLogout} className="logout-button">Logout</button>
+                    <h1>Мой профиль</h1>
+                    <button onClick={handleLogout} className="logout-button">Выйти</button>
                 </div>
 
                 <div className="profile-tabs">
@@ -62,19 +62,19 @@ const UserProfilePage: React.FC = () => {
                         className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`}
                         onClick={() => setActiveTab('profile')}
                     >
-                        Profile Info
+                        Информация профиля
                     </button>
                     <button
                         className={`tab-button ${activeTab === 'items' ? 'active' : ''}`}
                         onClick={() => setActiveTab('items')}
                     >
-                        My Items
+                        Мои товары
                     </button>
                     <button
                         className={`tab-button ${activeTab === 'purchases' ? 'active' : ''}`}
                         onClick={() => setActiveTab('purchases')}
                     >
-                        My Purchases
+                        Мои покупки
                     </button>
                 </div>
 
@@ -82,21 +82,21 @@ const UserProfilePage: React.FC = () => {
                     {activeTab === 'profile' && (
                         <div className="profile-info">
                             <div className="info-group">
-                                <label>Username:</label>
+                                <label>Имя пользователя:</label>
                                 <p>{user.username}</p>
                             </div>
                             <div className="info-group">
-                                <label>Email:</label>
+                                <label>Электронная почта:</label>
                                 <p>{user.email}</p>
                             </div>
                             <div className="info-group">
-                                <label>Role:</label>
+                                <label>Роль:</label>
                                 <p>{user.role}</p>
                             </div>
                             <div className="profile-actions">
-                                <Link to="/cart" className="view-cart-button">View Cart</Link>
+                                <Link to="/cart" className="view-cart-button">Просмотр корзины</Link>
                                 {user.role === 'Creator' || user.role === 'Admin' ? (
-                                    <Link to="/create-item" className="create-item-button">Create New Item</Link>
+                                    <Link to="/create-item" className="create-item-button">Создать новый товар</Link>
                                 ) : null}
                             </div>
                         </div>
@@ -105,14 +105,14 @@ const UserProfilePage: React.FC = () => {
                     {activeTab === 'items' && (
                         <div className="profile-items">
                             <div className="items-header">
-                                <h2>My Digital Content</h2>
-                                <Link to="/create-item" className="create-button">Create New</Link>
+                                <h2>Мой цифровой контент</h2>
+                                <Link to="/create-item" className="create-button">Создать новый</Link>
                             </div>
 
                             {loading ? (
-                                <div className="loading">Loading your items...</div>
+                                <div className="loading">Загрузка ваших товаров...</div>
                             ) : error ? (
-                                <div className="error">Error: {error}</div>
+                                <div className="error">Ошибка: {error}</div>
                             ) : items && items.items.length > 0 ? (
                                 <>
                                     <div className="items-grid">
@@ -120,7 +120,7 @@ const UserProfilePage: React.FC = () => {
                                             <div key={item.id} className="item-card-container">
                                                 <DigitalItemCard item={item} onAddToCart={() => {}} />
                                                 <div className="item-actions">
-                                                    <Link to={`/edit-item/${item.id}`} className="edit-button">Edit</Link>
+                                                    <Link to={`/edit-item/${item.id}`} className="edit-button">Редактировать</Link>
                                                 </div>
                                             </div>
                                         ))}
@@ -133,25 +133,25 @@ const UserProfilePage: React.FC = () => {
                                                 disabled={page === 1}
                                                 className="pagination-button"
                                             >
-                                                Previous
+                                                Назад
                                             </button>
                                             <span className="pagination-info">
-                        Page {page} of {items.totalPages}
+                        Страница {page} из {items.totalPages}
                       </span>
                                             <button
                                                 onClick={() => handlePageChange(page + 1)}
                                                 disabled={page === items.totalPages}
                                                 className="pagination-button"
                                             >
-                                                Next
+                                                Вперед
                                             </button>
                                         </div>
                                     )}
                                 </>
                             ) : (
                                 <div className="empty-items">
-                                    <p>You haven't created any digital content yet.</p>
-                                    <Link to="/create-item" className="create-button">Create Your First Item</Link>
+                                    <p>Вы еще не создали цифровой контент.</p>
+                                    <Link to="/create-item" className="create-button">Создайте свой первый товар</Link>
                                 </div>
                             )}
                         </div>
@@ -159,8 +159,8 @@ const UserProfilePage: React.FC = () => {
 
                     {activeTab === 'purchases' && (
                         <div className="profile-purchases">
-                            <h2>My Purchases</h2>
-                            <p className="coming-soon">Purchase history will be available soon.</p>
+                            <h2>Мои покупки</h2>
+                            <p className="coming-soon">История покупок скоро будет доступна.</p>
                         </div>
                     )}
                 </div>

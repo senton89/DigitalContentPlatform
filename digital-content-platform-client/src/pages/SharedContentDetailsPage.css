@@ -1,0 +1,23 @@
+.shared-content-details {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.shared-content-details h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.shared-content-details p {
+    margin-bottom: 1rem;
+}
+
+.shared-content-details .share-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}

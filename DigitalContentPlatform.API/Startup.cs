@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DigitalContentPlatform.API.Profiles;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 
 namespace DigitalContentPlatform.API
@@ -42,7 +43,8 @@ namespace DigitalContentPlatform.API
             services.AddScoped<IDigitalItemRepository, DigitalItemRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
-            
+            services.AddScoped<ISharedContentRepository, SharedContentRepository>();
+
             // Регистрация кэш-сервиса
             services.AddMemoryCache();
             services.AddSingleton<ICacheService, MemoryCacheService>();
@@ -57,6 +59,9 @@ namespace DigitalContentPlatform.API
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IFileService, CloudinaryService>();
+            services.AddScoped<ISharedContentService, SharedContentService>();
+            // services.AddScoped<IFileService, LocalStorageService>();
             
              // Декорирование репозиториев кэширующими декораторами
             services.Decorate<IDigitalItemRepository, CachedDigitalItemRepository>();
@@ -177,10 +182,17 @@ namespace DigitalContentPlatform.API
 
             app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            // app.UseStaticFiles(new StaticFileOptions
+            // {
+            //     FileProvider = new PhysicalFileProvider(
+            //         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+            //     RequestPath = "/static"
+            // });
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

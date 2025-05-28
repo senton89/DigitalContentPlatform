@@ -1,0 +1,51 @@
+.send-email-form {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.send-email-form h4 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.send-email-form input[type="email"],
+.send-email-form textarea {
+    width: 87%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.send-email-form .success {
+    color: green;
+    text-align: center;
+}
+
+.send-email-form .error {
+    color: red;
+    text-align: center;
+}
+
+.send-email-form button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.send-email-form button:disabled {
+    background-color: #a6c7ff;
+    cursor: not-allowed;
+}

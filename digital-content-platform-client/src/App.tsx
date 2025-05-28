@@ -6,8 +6,10 @@ import LoadingSpinner from './components/common/LoadingSpinner';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import './App.css';
 
-
 // Ленивая загрузка страниц
+const SharedContentUploadPage = lazy(() => import('./pages/SharedContentUploadPage'));
+const SharedContentListPage = lazy(() => import('./pages/SharedContentListPage'));
+const SharedContentViewPage = lazy(() => import('./pages/SharedContentViewPage'));
 const UserProfilePage = lazy(() => import('./pages/UserProfilePage'));
 const CartPage = lazy(() => import('./pages/CartPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -39,6 +41,9 @@ const App: React.FC = () => {
             <Route path="/search" element={<SearchResultsPage />} />
             <Route path="/items/:id" element={<DigitalItemDetailsPage />} />
             <Route path="/unauthorized" element={<UnauthorizedPage />} />
+            <Route path="/upload" element={<SharedContentUploadPage />} />
+            <Route path="/shared" element={<SharedContentListPage />} />
+            <Route path="/shared/:id" element={<SharedContentViewPage />}/>
 
             {/* Защищенные маршруты */}
             <Route element={<ProtectedRoute />}>

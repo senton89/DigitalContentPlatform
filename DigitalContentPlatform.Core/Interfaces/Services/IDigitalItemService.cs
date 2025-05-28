@@ -6,7 +6,7 @@ namespace DigitalContentPlatform.Core.Interfaces.Services
 {
     public interface IDigitalItemService
     {
-        Task<DigitalItemResult> CreateAsync(DigitalItemCreateDto dto, Guid userId);
+       Task<DigitalItemResult> CreateAsync(DigitalItemCreateDto dto, Guid userId, string imageUrl);
         Task<DigitalItemResult> UpdateAsync(Guid id, DigitalItemUpdateDto dto, Guid userId);
         Task<DigitalItemResult> DeleteAsync(Guid id, Guid userId);
         Task<DigitalItemDto> GetByIdAsync(Guid id);

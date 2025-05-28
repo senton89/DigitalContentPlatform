@@ -28,14 +28,14 @@ namespace DigitalContentPlatform.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task<DigitalItemResult> CreateAsync(DigitalItemCreateDto dto, Guid userId)
+        public async Task<DigitalItemResult> CreateAsync(DigitalItemCreateDto dto, Guid userId, string imageUrl)
         {
             var category = await _categoryRepository.GetByIdAsync(dto.CategoryId);
             if (category == null)
                 return new DigitalItemResult { Success = false, Message = "Category not found" };
 
             var filePath = await _fileService.SaveFileAsync(dto.File, "items");
-            var thumbnailPath = await _fileService.SaveFileAsync(dto.Thumbnail, "thumbnails");
+            // var thumbnailPath = await _fileService.SaveFileAsync(dto.Thumbnail, "thumbnails");
 
             var digitalItem = new DigitalItem
             {
@@ -44,7 +44,7 @@ namespace DigitalContentPlatform.Infrastructure.Services
                 Description = dto.Description,
                 Price = dto.Price,
                 FileUrl = filePath,
-                ThumbnailUrl = thumbnailPath,
+                ThumbnailUrl = imageUrl,
                 CategoryId = dto.CategoryId,
                 UserId = userId,
                 CreatedAt = DateTime.UtcNow,

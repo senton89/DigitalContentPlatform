@@ -26,7 +26,7 @@ const Header: React.FC = () => {
         <header className="header">
             <div className="header-container">
                 <div className="logo">
-                    <Link to="/">Digital Content Platform</Link>
+                    <Link to="/">Платформа цифрового контента</Link>
                 </div>
                 
                 <div className="search-container desktop-search">
@@ -39,24 +39,26 @@ const Header: React.FC = () => {
                     </button>
                     
                     <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/catalog">Catalog</Link></li>
+                        <li><Link to="/">Главная</Link></li>
+                        <li><Link to="/catalog">Каталог</Link></li>
+                        <li><Link to="/shared" style={{marginRight: '-20px'}}>Общий контент</Link></li>
                         {isAuthenticated ? (
                             <>
-                                <li><Link to="/profile">Profile</Link></li>
+                                <li><Link to="/upload" style={{marginRight: '-50px'}}>Загрузить контент</Link></li>
+                                <li><Link to="/profile" style={{marginLeft: '20px'}}>Профиль</Link></li>
                                 {user?.role === 'Admin' && (
-                                    <li><Link to="/admin">Admin</Link></li>
+                                    <li><Link to="/admin">Админ</Link></li>
                                 )}
                                 <li>
                                     <button onClick={handleLogout} className="logout-button">
-                                        Logout
+                                        Выйти
                                     </button>
                                 </li>
                             </>
                         ) : (
                             <>
-                                <li><Link to="/login">Login</Link></li>
-                                <li><Link to="/register">Register</Link></li>
+                            <li><Link to="/login">Вход</Link></li>
+                                <li><Link to="/register">Регистрация</Link></li>
                             </>
                         )}
                     </ul>
@@ -68,6 +70,7 @@ const Header: React.FC = () => {
                     <SearchBar onSearch={() => setShowMobileSearch(false)} />
                 </div>
             )}
+
         </header>
     );
 };

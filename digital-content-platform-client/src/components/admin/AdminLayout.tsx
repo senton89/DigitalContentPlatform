@@ -12,29 +12,30 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     return (
         <div className="admin-layout">
             <div className="admin-sidebar">
-                <h2>Admin Panel</h2>
+                <h2>Панель администратора</h2>
                 <nav className="admin-nav">
                     <Link 
                         to="/admin" 
                         className={location.pathname === '/admin' ? 'active' : ''}
                     >
-                        Dashboard
+                        Панель
                     </Link>
                     <Link 
                         to="/admin/users" 
                         className={location.pathname === '/admin/users' ? 'active' : ''}
                     >
-                        Users
+                        Пользователи
                     </Link>
                     <Link 
                         to="/admin/content" 
                         className={location.pathname === '/admin/content' ? 'active' : ''}
                     >
-                        Content
+                        Контент
                     </Link>
-                    <Link to="/">Back to Site</Link>
+                    <Link to="/">Вернуться на сайт</Link>
                 </nav>
             </div>
+
             <div className="admin-content">
                 {children}
             </div>

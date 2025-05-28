@@ -7,12 +7,12 @@ const UnauthorizedPage: React.FC = () => {
     return (
         <div className="unauthorized-page">
             <div className="unauthorized-container">
-                <h1>Unauthorized Access</h1>
-                <p>Sorry, you don't have permission to access this page.</p>
-                <p>Please contact an administrator if you believe this is an error.</p>
+                <h1>Доступ запрещен</h1>
+                <p>Извините, у вас нет прав для доступа к этой странице.</p>
+                <p>Пожалуйста, свяжитесь с администратором, если вы считаете, что это ошибка.</p>
                 <div className="unauthorized-actions">
-                    <Link to="/" className="home-button">Go to Home</Link>
-                    <Link to="/login" className="login-button">Login</Link>
+                    <Link to="/" className="home-button">Перейти на главную</Link>
+                    <Link to="/login" className="login-button">Войти</Link>
                 </div>
             </div>
         </div>

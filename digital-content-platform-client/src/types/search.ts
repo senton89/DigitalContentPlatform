@@ -15,10 +15,10 @@ export interface SortOption {
 }
 
 export const sortOptions: SortOption[] = [
-    { value: 'CreatedAt', label: 'Date (Newest First)' },
-    { value: 'CreatedAt', label: 'Date (Oldest First)' },
-    { value: 'Price', label: 'Price (High to Low)' },
-    { value: 'Price', label: 'Price (Low to High)' },
-    { value: 'Title', label: 'Title (A-Z)' },
-    { value: 'Title', label: 'Title (Z-A)' }
+    { value: 'CreatedAt', label: 'Дата (сначала новые)' },
+    { value: 'CreatedAt', label: 'Дата (сначала старые)' },
+    { value: 'Price', label: 'Цена (по убыванию)' },
+    { value: 'Price', label: 'Цена (по возрастанию)' },
+    { value: 'Title', label: 'Название (А-Я)' },
+    { value: 'Title', label: 'Название (Я-А)' }
 ];

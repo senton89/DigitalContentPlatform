@@ -1,0 +1,38 @@
+.content-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: box-shadow 0.3s ease-in-out;
+    background-color: #fff;
+    max-width: 300px;
+    margin: auto;
+}
+
+.content-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.content-card .content-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.content-card h3 {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+.content-card p.type {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 1rem 0 0.5rem;
+}
+
+.content-card a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.content-card .card-actions {
+    margin-top: 1rem;
+}

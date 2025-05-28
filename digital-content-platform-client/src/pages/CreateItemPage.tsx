@@ -14,7 +14,6 @@ const CreateItemPage: React.FC = () => {
 
   return (
     <div className="create-item-page">
-      <h1>Create New Digital Content</h1>
       <DigitalItemForm onSuccess={handleSuccess} />
     </div>
   );

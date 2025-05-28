@@ -13,36 +13,36 @@ const Dashboard: React.FC = () => {
         dispatch(fetchDashboardStats());
     }, [dispatch]);
 
-    if (loading) return <div className="loading">Loading dashboard stats...</div>;
-    if (error) return <div className="error">Error: {error}</div>;
-    if (!dashboardStats) return <div className="error">No dashboard data available</div>;
+    if (loading) return <div className="loading">Загрузка статистики панели...</div>;
+    if (error) return <div className="error">Ошибка: {error}</div>;
+    if (!dashboardStats) return <div className="error">Данные панели недоступны</div>;
 
     return (
         <div className="dashboard">
-            <h1>Admin Dashboard</h1>
+            <h1>Панель администратора</h1>
             
             <div className="stats-cards">
                 <div className="stat-card">
-                    <h3>Total Users</h3>
+                    <h3>Всего пользователей</h3>
                     <p className="stat-value">{dashboardStats.totalUsers}</p>
                 </div>
                 <div className="stat-card">
-                    <h3>Total Items</h3>
+                    <h3>Всего товаров</h3>
                     <p className="stat-value">{dashboardStats.totalItems}</p>
                 </div>
                 <div className="stat-card">
-                    <h3>Total Orders</h3>
+                    <h3>Всего заказов</h3>
                     <p className="stat-value">{dashboardStats.totalOrders}</p>
                 </div>
                 <div className="stat-card">
-                    <h3>Total Revenue</h3>
+                    <h3>Общий доход</h3>
                     <p className="stat-value">${dashboardStats.totalRevenue.toFixed(2)}</p>
                 </div>
             </div>
 
             <div className="charts-container">
                 <div className="chart-box">
-                    <h3>User Registrations by Month</h3>
+                    <h3>Регистрация пользователей по месяцам</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={dashboardStats.userRegistrationsByMonth}>
                             <CartesianGrid strokeDasharray="3 3" />
@@ -50,13 +50,13 @@ const Dashboard: React.FC = () => {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="value" name="Users" fill="#8884d8" />
+                            <Bar dataKey="value" name="Пользователи" fill="#8884d8" />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
                 
                 <div className="chart-box">
-                    <h3>Sales by Month</h3>
+                    <h3>Продажи по месяцам</h3>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={dashboardStats.salesByMonth}>
                             <CartesianGrid strokeDasharray="3 3" />
@@ -64,21 +64,21 @@ const Dashboard: React.FC = () => {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="value" name="Sales" fill="#82ca9d" />
+                            <Bar dataKey="value" name="Продажи" fill="#82ca9d" />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
             </div>
 
             <div className="top-categories">
-                <h3>Top Categories</h3>
+                <h3>Топ категории</h3>
                 <table className="categories-table">
                     <thead>
                         <tr>
-                            <th>Category</th>
-                            <th>Items</th>
-                            <th>Orders</th>
-                            <th>Revenue</th>
+                            <th>Категория</th>
+                            <th>Товары</th>
+                            <th>Заказы</th>
+                            <th>Доход</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,5 +96,6 @@ const Dashboard: React.FC = () => {
         </div>
     );
 };
+
 
 export default Dashboard;

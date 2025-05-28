@@ -8,7 +8,7 @@ const LoginPage: React.FC = () => {
       <div className="auth-container">
         <LoginForm />
         <p>
-          Don't have an account? <Link to="/register">Register</Link>
+          Нет аккаунта? <Link to="/register">Зарегистрируйтесь</Link>
         </p>
       </div>
     </div>

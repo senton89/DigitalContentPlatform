@@ -85,7 +85,7 @@
 }
 
 .info-group p {
-    margin: 0;
+    margin-left: 100px;
     color: #333;
     flex: 1;
 }

@@ -106,21 +106,21 @@ const FilterPanel: React.FC = () => {
   }, [dispatch, filterParams]);
 
   if (isLoading) {
-    return <div className="filter-panel-loading">Loading filters...</div>;
+    return <div className="filter-panel-loading">Загружаем фильтры...</div>;
   }
 
   return (
       <div className="filter-panel">
-        <h3>Filter & Sort</h3>
+        <h3>Фильтр и сортировка</h3>
 
         <div className="filter-group">
-          <label htmlFor="category">Category</label>
+          <label htmlFor="category">Категория</label>
           <select
               id="category"
               value={localFilters.categoryId}
               onChange={handleCategoryChange}
           >
-            <option value="">All Categories</option>
+            <option value="">Все категории</option>
             {Array.isArray(categories) && categories.map(category => (
                 <option key={category.id} value={category.id}>
                   {category.name}
@@ -130,24 +130,24 @@ const FilterPanel: React.FC = () => {
         </div>
 
         <div className="filter-group">
-          <label htmlFor="price-range">Price Range</label>
+          <label htmlFor="price-range">Ценовой диапазон</label>
           <div className="price-inputs">
             <input
                 type="number"
                 id="min-price"
-                placeholder="Min"
+                placeholder="Мин"
                 min="0"
                 step="0.01"
                 value={localFilters.minPrice}
                 onChange={handleMinPriceChange}
             />
-            <span>to</span>
+            <span>до</span>
           </div>
           <div className="price-inputs">
             <input
                 type="number"
                 id="max-price"
-                placeholder="Max"
+                placeholder="Макс"
                 min="0"
                 step="0.01"
                 value={localFilters.maxPrice}
@@ -157,7 +157,7 @@ const FilterPanel: React.FC = () => {
           </div>
 
           <div className="filter-group">
-            <label htmlFor="sort">Sort By</label>
+            <label htmlFor="sort">Сортировать по</label>
             <select
                 id="sort"
                 value={localFilters.sortOption}
@@ -176,13 +176,13 @@ const FilterPanel: React.FC = () => {
               onClick={handleApplyFilters}
               className="apply-filters-button"
           >
-            Apply Filters
+            Применить фильтры
           </button>
           <button
               onClick={handleResetFilters}
               className="reset-filters-button"
           >
-            Reset
+            Сбросить
           </button>
         </div>
       </div>

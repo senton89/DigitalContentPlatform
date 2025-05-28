@@ -65,7 +65,7 @@ const SearchResultsPage: React.FC = () => {
     return (
         <div className="search-results-page">
             <div className="search-header">
-                <h1>Search Results</h1>
+                <h1>Результаты поиска</h1>
                 <SearchBar 
                     initialQuery={filterParams.searchQuery || ''} 
                     className="search-results-searchbar"
@@ -79,15 +79,15 @@ const SearchResultsPage: React.FC = () => {
                 
                 <main className="search-main">
                     {loading ? (
-                        <div className="loading">Loading search results...</div>
+                        <div className="loading">Загрузка результатов поиска...</div>
                     ) : error ? (
-                        <div className="error">Error: {error}</div>
+                        <div className="error">Ошибка: {error}</div>
                     ) : searchResults && searchResults.items.length > 0 ? (
                         <>
                             <div className="search-info">
                                 <p>
-                                    Found {searchResults.totalItems} results
-                                    {filterParams.searchQuery && ` for "${filterParams.searchQuery}"`}
+                                    Найдено {searchResults.totalItems} результатов
+                                    {filterParams.searchQuery && ` по запросу "${filterParams.searchQuery}"`}
                                 </p>
                             </div>
                             
@@ -108,30 +108,30 @@ const SearchResultsPage: React.FC = () => {
                                         disabled={filterParams.page === 1} 
                                         className="pagination-button"
                                     >
-                                        Previous
+                                        Назад
                                     </button>
                                     <span className="pagination-info">
-                                        Page {filterParams.page} of {searchResults.totalPages}
+                                        Страница {filterParams.page} из {searchResults.totalPages}
                                     </span>
                                     <button 
                                         onClick={() => handlePageChange(filterParams.page + 1)} 
                                         disabled={filterParams.page === searchResults.totalPages} 
                                         className="pagination-button"
                                     >
-                                        Next
+                                        Вперед
                                     </button>
                                 </div>
                             )}
                         </>
                     ) : (
                         <div className="no-results">
-                            <h2>No results found</h2>
+                            <h2>Результаты не найдены</h2>
                             <p>
                                 {filterParams.searchQuery 
-                                    ? `No items match your search for "${filterParams.searchQuery}".` 
-                                    : "No items match your filter criteria."}
+                                    ? `Нет товаров, соответствующих вашему запросу "${filterParams.searchQuery}".` 
+                                    : "Нет товаров, соответствующих вашим критериям фильтрации."}
                             </p>
-                            <p>Try adjusting your search or filter settings.</p>
+                            <p>Попробуйте изменить параметры поиска или фильтра.</p>
                         </div>
                     )}
                 </main>

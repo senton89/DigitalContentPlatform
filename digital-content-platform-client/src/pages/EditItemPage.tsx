@@ -24,9 +24,9 @@ const EditItemPage: React.FC = () => {
     navigate('/profile');
   };
 
-  if (loading) return <div className="loading">Loading item...</div>;
-  if (error) return <div className="error">Error: {error}</div>;
-  if (!currentItem) return <div className="error">Item not found</div>;
+  if (loading) return <div className="loading">Загрузка товара...</div>;
+  if (error) return <div className="error">Ошибка: {error}</div>;
+  if (!currentItem) return <div className="error">Товар не найден</div>;
 
   const initialData = {
     title: currentItem.title,
@@ -40,7 +40,7 @@ const EditItemPage: React.FC = () => {
 
   return (
     <div className="edit-item-page">
-      <h1>Edit Digital Content</h1>
+      <h1>Редактировать цифровой контент</h1>
       <DigitalItemForm itemId={id} initialData={initialData} onSuccess={handleSuccess} />
     </div>
   );

@@ -5,6 +5,7 @@ import digitalItemReducer from './slices/digitalItemSlice';
 import searchReducer from './slices/searchSlice';
 import adminReducer from './slices/adminSlice';
 import cartReducer from './slices/cartSlice';
+import sharedContentReducer from './slices/sharedContentSlice';
 
 export const store = configureStore({
     reducer: {
@@ -12,7 +13,8 @@ export const store = configureStore({
         digitalItem: digitalItemReducer,
         search: searchReducer,
         admin: adminReducer,
-        cart: cartReducer
+        cart: cartReducer,
+        sharedContent: sharedContentReducer
     }
 });
 

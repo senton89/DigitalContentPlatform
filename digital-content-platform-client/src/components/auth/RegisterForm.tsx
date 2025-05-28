@@ -23,22 +23,23 @@ const RegisterForm: React.FC = () => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(3, 'Must be at least 3 characters')
-        .max(20, 'Must be 20 characters or less')
-        .matches(/^[a-zA-Z0-9_-]+$/, 'Can only contain letters, numbers, underscores and hyphens')
-        .required('Required'),
+        .min(3, 'Минимум 3 символа')
+        .max(20, 'Максимум 20 символов')
+        .matches(/^[a-zA-Z0-9_-]+$/, 'Допустимы только буквы, цифры, подчеркивания и дефисы')
+        .required('Обязательно'),
       email: Yup.string()
-        .email('Invalid email address')
-        .required('Required'),
+        .email('Неверный адрес электронной почты')
+        .required('Обязательно'),
       password: Yup.string()
-        .min(6, 'Must be at least 6 characters')
-        .matches(/[A-Z]/, 'Must contain at least one uppercase letter')
-        .matches(/[0-9]/, 'Must contain at least one number')
-        .matches(/[^a-zA-Z0-9]/, 'Must contain at least one special character')
-        .required('Required'),
+        .min(6, 'Минимум 6 символов')
+        .matches(/[A-Z]/, 'Должна содержать хотя бы одну заглавную букву')
+        .matches(/[0-9]/, 'Должна содержать хотя бы одну цифру')
+        .matches(/[^a-zA-Z0-9]/, 'Должна содержать хотя бы один специальный символ')
+        .required('Обязательно'),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password')], 'Passwords must match')
-        .required('Required')
+        .oneOf([Yup.ref('password')], 'Пароли должны совпадать')
+        .required('Обязательно')
+
     }),
     onSubmit: (values: RegisterRequest) => {
       dispatch(clearError());
@@ -55,11 +56,11 @@ const RegisterForm: React.FC = () => {
 
   return (
     <div className="register-form">
-      <h2>Register</h2>
+      <h2>Регистрация</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={formik.handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Имя пользователя</label>
           <input
             id="username"
             name="username"
@@ -74,7 +75,7 @@ const RegisterForm: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Электронная почта</label>
           <input
             id="email"
             name="email"
@@ -89,7 +90,7 @@ const RegisterForm: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Пароль</label>
           <input
             id="password"
             name="password"
@@ -104,7 +105,7 @@ const RegisterForm: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Подтвердите пароль</label>
           <input
             id="confirmPassword"
             name="confirmPassword"
@@ -119,11 +120,12 @@ const RegisterForm: React.FC = () => {
         </div>
 
         <button type="submit" disabled={loading}>
-          {loading ? 'Registering...' : 'Register'}
+          {loading ? 'Регистрация...' : 'Зарегистрироваться'}
         </button>
       </form>
     </div>
   );
 };
+
 
 export default RegisterForm;

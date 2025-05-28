@@ -8,7 +8,7 @@ const RegisterPage: React.FC = () => {
       <div className="auth-container">
         <RegisterForm />
         <p>
-          Already have an account? <Link to="/login">Login</Link>
+          Уже есть аккаунт? <Link to="/login">Войти</Link>
         </p>
       </div>
     </div>

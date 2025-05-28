@@ -48,27 +48,27 @@ const CartPage: React.FC = () => {
         toast.info('Checkout functionality will be available soon');
     };
 
-    if (loading) return <div className="loading">Loading cart...</div>;
-    if (error) return <div className="error">Error: {error}</div>;
-    if (!cart) return <div className="loading">Loading cart...</div>;
+    if (loading) return <div className="loading">Загрузка корзины...</div>;
+    if (error) return <div className="error">Ошибка: {error}</div>;
+    if (!cart) return <div className="loading">Загрузка корзины...</div>;
 
     return (
         <div className="cart-page">
             <div className="cart-container">
                 <div className="cart-header">
-                    <h1>Your Shopping Cart</h1>
+                    <h1>Ваша корзина</h1>
                     {cart.items.length > 0 && (
                         <button onClick={handleClearCart} className="clear-cart-button">
-                            Clear Cart
+                            Очистить корзину
                         </button>
                     )}
                 </div>
 
                 {cart.items.length === 0 ? (
                     <div className="empty-cart">
-                        <p>Your cart is empty.</p>
+                        <p>Ваша корзина пуста.</p>
                         <Link to="/catalog" className="continue-shopping-button">
-                            Continue Shopping
+                            Продолжить покупки
                         </Link>
                     </div>
                 ) : (
@@ -85,7 +85,7 @@ const CartPage: React.FC = () => {
                                         </h3>
                                         <p className="item-description">{item.description}</p>
                                         <p className="item-added">
-                                            Added: {new Date(item.addedAt).toLocaleDateString()}
+                                            Добавлено: {new Date(item.addedAt).toLocaleDateString()}
                                         </p>
                                     </div>
                                     <div className="item-price">${item.price.toFixed(2)}</div>
@@ -94,7 +94,7 @@ const CartPage: React.FC = () => {
                                             onClick={() => handleRemoveItem(item.id)}
                                             className="remove-button"
                                         >
-                                            Remove
+                                            Удалить
                                         </button>
                                     </div>
                                 </div>
@@ -103,18 +103,18 @@ const CartPage: React.FC = () => {
 
                         <div className="cart-summary">
                             <div className="summary-row">
-                                <span>Items:</span>
+                                <span>Товаров:</span>
                                 <span>{cart.itemCount}</span>
                             </div>
                             <div className="summary-row total">
-                                <span>Total:</span>
+                                <span>Итого:</span>
                                 <span>${cart.totalPrice.toFixed(2)}</span>
                             </div>
                             <button onClick={handleCheckout} className="checkout-button">
-                                Proceed to Checkout
+                                Оформить заказ
                             </button>
                             <Link to="/catalog" className="continue-shopping-link">
-                                Continue Shopping
+                                Продолжить покупки
                             </Link>
                         </div>
                     </>
@@ -123,5 +123,6 @@ const CartPage: React.FC = () => {
         </div>
     );
 };
+
 
 export default CartPage;

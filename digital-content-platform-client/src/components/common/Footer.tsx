@@ -10,31 +10,31 @@ const Footer: React.FC = () => {
         <footer className="footer">
             <div className="footer-container">
                 <div className="footer-section">
-                    <h3>Digital Content Platform</h3>
-                    <p>Your one-stop solution for digital content management</p>
+                    <h3>Платформа цифрового контента</h3>
+                    <p>Ваш универсальный помощник в управлении цифровым контентом</p>
                 </div>
 
                 <div className="footer-section">
-                    <h3>Quick Links</h3>
+                    <h3>Быстрые ссылки</h3>
                     <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/catalog">Catalog</Link></li>
-                        <li><Link to="/login">Login</Link></li>
-                        <li><Link to="/register">Register</Link></li>
+                        <li><Link to="/">Главная</Link></li>
+                        <li><Link to="/catalog">Каталог</Link></li>
+                        <li><Link to="/login">Вход</Link></li>
+                        <li><Link to="/register">Регистрация</Link></li>
                     </ul>
                 </div>
 
                 <div className="footer-section">
-                    <h3>Legal</h3>
+                    <h3>Правовая информация</h3>
                     <ul>
-                        <li><Link to="/terms">Terms of Service</Link></li>
-                        <li><Link to="/privacy">Privacy Policy</Link></li>
+                        <li><Link to="/terms">Условия использования</Link></li>
+                        <li><Link to="/privacy">Политика конфиденциальности</Link></li>
                     </ul>
                 </div>
             </div>
 
             <div className="footer-bottom">
-                <p>&copy; {currentYear} Digital Content Platform. All rights reserved.</p>
+                <p>&copy; {currentYear} Платформа цифрового контента. Все права защищены.</p>
             </div>
         </footer>
     );

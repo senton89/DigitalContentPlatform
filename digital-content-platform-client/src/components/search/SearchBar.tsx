@@ -36,7 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialQuery = '', clas
         <form onSubmit={handleSearch} className={`search-bar ${className}`} role="form">
             <input
                 type="text"
-                placeholder="Search for digital content..."
+                placeholder="Искать цифровой контент..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="search-input"

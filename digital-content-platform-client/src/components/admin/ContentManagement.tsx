@@ -40,17 +40,17 @@ const ContentManagement: React.FC = () => {
 
     return (
         <div className="content-management">
-            <h1>Content Management</h1>
+            <h1>Управление контентом</h1>
 
             <div className="items-table-container">
                 <table className="items-table">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th>Название</th>
+                            <th>Категория</th>
+                            <th>Цена</th>
+                            <th>Дата создания</th>
+                            <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,18 +63,18 @@ const ContentManagement: React.FC = () => {
                                 <td>
                                     {confirmDelete === item.id ? (
                                         <div className="confirm-delete">
-                                            <span>Are you sure?</span>
+                                            <span>Вы уверены?</span>
                                             <button 
                                                 onClick={() => handleDelete(item.id)}
                                                 className="confirm-yes"
                                             >
-                                                Yes
+                                                Да
                                             </button>
                                             <button 
                                                 onClick={() => setConfirmDelete(null)}
                                                 className="confirm-no"
                                             >
-                                                No
+                                                Нет
                                             </button>
                                         </div>
                                     ) : (
@@ -82,7 +82,7 @@ const ContentManagement: React.FC = () => {
                                             onClick={() => handleDeleteConfirm(item.id)}
                                             className="delete-button"
                                         >
-                                            Delete
+                                            Удалить
                                         </button>
                                     )}
                                 </td>
@@ -99,21 +99,22 @@ const ContentManagement: React.FC = () => {
                         disabled={page === 1}
                         className="pagination-button"
                     >
-                        Previous
+                        Назад
                     </button>
                     <span className="pagination-info">
-                        Page {page} of {items.totalPages}
+                        Страница {page} из {items.totalPages}
                     </span>
                     <button 
                         onClick={() => handlePageChange(page + 1)} 
                         disabled={page === items.totalPages}
                         className="pagination-button"
                     >
-                        Next
+                        Вперед
                     </button>
                 </div>
             )}
         </div>
+
     );
 };
 

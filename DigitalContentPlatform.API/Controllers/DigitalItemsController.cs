@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DigitalContentPlatform.Core.Entities;
 
 namespace DigitalContentPlatform.API.Controllers
 {
@@ -14,10 +15,12 @@ namespace DigitalContentPlatform.API.Controllers
     public class DigitalItemsController : ControllerBase
     {
         private readonly IDigitalItemService _digitalItemService;
+        private IFileService _fileStorageService;
 
-        public DigitalItemsController(IDigitalItemService digitalItemService)
+        public DigitalItemsController(IDigitalItemService digitalItemService,IFileService fileStorageService)
         {
             _digitalItemService = digitalItemService;
+            _fileStorageService = fileStorageService;
         }
 
         [HttpGet]
@@ -56,11 +59,31 @@ namespace DigitalContentPlatform.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] DigitalItemCreateDto dto)
         {
+            string imageUrl = null;
+
+            if (dto.Thumbnail != null)
+            {
+                // Загружаем файл напрямую в Cloudinary без сохранения на диск
+                using var memoryStream = new MemoryStream();
+                await dto.Thumbnail.CopyToAsync(memoryStream);
+        
+                // Используем имя файла из DTO
+                var fileName = Path.GetFileNameWithoutExtension(dto.Thumbnail.FileName) + "_" + Guid.NewGuid();
+
+                // Загружаем в Cloudinary
+                imageUrl = await _fileStorageService.SaveFileAsync( dto.File, "thumbnails");
+
+                // Проверяем, что URL не null
+                if (string.IsNullOrEmpty(imageUrl))
+                    return StatusCode(500, new { message = "Не удалось загрузить изображение" });
+            }
+
+            // Передаём DTO и URL из Cloudinary в сервис
             var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var result = await _digitalItemService.CreateAsync(dto, userId);
+            var result = await _digitalItemService.CreateAsync(dto, userId, imageUrl);
 
             if (!result.Success)
-                return BadRequest(result.Message);
+                return BadRequest(new { message = result.Message });
 
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }

@@ -1,8 +1,8 @@
-
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DigitalItemDto } from '../../types/digitalItem';
 import './DigitalItemCard.css';
+import ShareButtons from '../shared/ShareButtons';
 
 interface DigitalItemCardProps {
   item: DigitalItemDto;
@@ -11,6 +11,7 @@ interface DigitalItemCardProps {
 
 const DigitalItemCard: React.FC<DigitalItemCardProps> = React.memo(({ item, onAddToCart }) => {
   const navigate = useNavigate();
+  const shareUrl = `${window.location.origin}/items/${item.id}`;
 
   const handleViewDetails = useCallback(() => {
     navigate(`/items/${item.id}`);
@@ -32,13 +33,15 @@ const DigitalItemCard: React.FC<DigitalItemCardProps> = React.memo(({ item, onAd
         <p className="item-creator">By: {item.creatorUsername}</p>
         <div className="item-actions">
           <button onClick={handleViewDetails} className="view-details-button">
-            View Details
+            Подробнее
           </button>
           {onAddToCart && (
             <button onClick={handleAddToCart} className="add-to-cart-button">
-              Add to Cart
+              Добавить в корзину
             </button>
           )}
+
+          <ShareButtons url={shareUrl} title={item.title} />
         </div>
       </div>
     </div>

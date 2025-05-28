@@ -21,10 +21,10 @@ const LoginForm: React.FC = () => {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .email('Invalid email address')
-        .required('Required'),
+        .email('Неверный адрес электронной почты')
+        .required('Обязательно'),
       password: Yup.string()
-        .required('Required')
+        .required('Обязательно')
     }),
     onSubmit: (values: LoginRequest) => {
       dispatch(clearError());
@@ -41,11 +41,11 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className="login-form">
-      <h2>Login</h2>
+      <h2>Вход</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={formik.handleSubmit}>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Электронная почта</label>
           <input
             id="email"
             name="email"
@@ -60,7 +60,7 @@ const LoginForm: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Пароль</label>
           <input
             id="password"
             name="password"
@@ -82,11 +82,11 @@ const LoginForm: React.FC = () => {
             onChange={formik.handleChange}
             checked={formik.values.rememberMe}
           />
-          <label htmlFor="rememberMe">Remember me</label>
+          <label htmlFor="rememberMe">Запомнить меня</label>
         </div>
 
         <button type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
+          {loading ? 'Вход...' : 'Войти'}
         </button>
       </form>
     </div>

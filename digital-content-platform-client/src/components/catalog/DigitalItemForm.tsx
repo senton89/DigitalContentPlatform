@@ -84,11 +84,11 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
 
   return (
     <div className="digital-item-form-container">
-      <h2>{itemId ? 'Edit Digital Item' : 'Create New Digital Item'}</h2>
+      <h2>{itemId ? 'Редактировать цифровой товар' : 'Создать новый цифровой товар'}</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
         <div className="form-group">
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title">Название</label>
           <input
             id="title"
             name="title"
@@ -103,7 +103,7 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
         </div>
 
         <div className="form-group">
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">Описание</label>
           <textarea
             id="description"
             name="description"
@@ -118,7 +118,7 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
         </div>
 
         <div className="form-group">
-          <label htmlFor="price">Price ($)</label>
+          <label htmlFor="price">Цена ($)</label>
           <input
             id="price"
             name="price"
@@ -134,9 +134,9 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
         </div>
 
         <div className="form-group">
-          <label htmlFor="categoryId">Category</label>
+          <label htmlFor="categoryId">Категория</label>
           {isLoadingCategories ? (
-            <div>Loading categories...</div>
+            <div>Загрузка категорий...</div>
           ) : (
             <select
               id="categoryId"
@@ -145,7 +145,7 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
               onBlur={formik.handleBlur}
               value={formik.values.categoryId}
             >
-              <option value="">Select a category</option>
+              <option value="">Выберите категорию</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
@@ -159,7 +159,7 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
         </div>
 
         <div className="form-group">
-          <label htmlFor="file">File</label>
+          <label htmlFor="file">Файл</label>
           <input
             id="file"
             name="file"
@@ -173,7 +173,7 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
         </div>
 
         <div className="form-group">
-          <label htmlFor="thumbnail">Thumbnail</label>
+          <label htmlFor="thumbnail">Миниатюра</label>
           <input
             id="thumbnail"
             name="thumbnail"
@@ -188,7 +188,7 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
         </div>
 
         <div className="form-group">
-          <label htmlFor="status">Status</label>
+          <label htmlFor="status">Статус</label>
           <select
             id="status"
             name="status"
@@ -196,9 +196,9 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
             onBlur={formik.handleBlur}
             value={formik.values.status}
           >
-            <option value="Active">Active</option>
-            <option value="Draft">Draft</option>
-            <option value="Archived">Archived</option>
+            <option value="Active">Активен</option>
+            <option value="Draft">Черновик</option>
+            <option value="Archived">Архив</option>
           </select>
           {formik.touched.status && formik.errors.status ? (
             <div className="error">{formik.errors.status}</div>
@@ -206,11 +206,12 @@ const DigitalItemForm: React.FC<DigitalItemFormProps> = ({ itemId, initialData, 
         </div>
 
         <button type="submit" disabled={loading || isLoadingCategories}>
-          {loading ? 'Submitting...' : itemId ? 'Update Item' : 'Create Item'}
+          {loading ? 'Отправка...' : itemId ? 'Обновить товар' : 'Создать товар'}
         </button>
       </form>
     </div>
   );
 };
+
 
 export default DigitalItemForm;

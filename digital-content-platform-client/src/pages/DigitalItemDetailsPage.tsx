@@ -7,6 +7,7 @@ import { fetchItemById } from '../store/slices/digitalItemSlice';
 import './DigitalItemDetailsPage.css';
 import {addToCart} from "../store/slices/cartSlice";
 import {toast} from "react-toastify";
+import SendEmailForm from "../components/shared/SendEmailForm";
 
 const DigitalItemDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,7 +17,6 @@ const DigitalItemDetailsPage: React.FC = () => {
 
   const location = useLocation();
   const { isAuthenticated } = useAppSelector((state: RootState) => state.auth);
-
 
   useEffect(() => {
     if (id) {
@@ -47,33 +47,40 @@ const DigitalItemDetailsPage: React.FC = () => {
     navigate('/catalog');
   };
 
-  if (loading) return <div className="loading">Loading item details...</div>;
-  if (error) return <div className="error">Error: {error}</div>;
-  if (!currentItem) return <div className="error">Item not found</div>;
+  if (loading) return <div className="loading">Загрузка деталей товара...</div>;
+  if (error) return <div className="error">Ошибка: {error}</div>;
+  if (!currentItem) return <div className="error">Товар не найден</div>;
 
   return (
-    <div className="item-details-page">
-      <button onClick={handleBack} className="back-button">← Back to Catalog</button>
-      <div className="item-details-container">
-        <div className="item-image">
-          <img src={currentItem.thumbnailUrl} alt={currentItem.title} />
-        </div>
-        <div className="item-info">
-          <h1>{currentItem.title}</h1>
-          <p className="item-category">Category: {currentItem.categoryName}</p>
-          <p className="item-creator">By: {currentItem.creatorUsername}</p>
-          <p className="item-price">${currentItem.price.toFixed(2)}</p>
-          <p className="item-description">{currentItem.description}</p>
-          <div className="item-actions">
-            <button onClick={() => handleAddToCart(currentItem.id)} className="add-to-cart-button">Add to Cart</button>
+      <div className="item-details-page">
+        <button onClick={handleBack} className="back-button">← Назад к каталогу</button>
+        <div className="item-details-container">
+          <div className="item-image">
+            <img src={"../" + currentItem.thumbnailUrl} alt={currentItem.title}/>
           </div>
-          <p className="item-dates">
-            Created: {new Date(currentItem.createdAt).toLocaleDateString()} | Updated: {new Date(currentItem.updatedAt).toLocaleDateString()}
-          </p>
+          <div className="item-info">
+            <h1>{currentItem.title}</h1>
+            <p className="item-category">Категория: {currentItem.categoryName}</p>
+            <p className="item-creator">Автор: {currentItem.creatorUsername}</p>
+            <p className="item-price">${currentItem.price.toFixed(2)}</p>
+            <p className="item-description">{currentItem.description}</p>
+            <div className="item-actions">
+              <button onClick={() => handleAddToCart(currentItem.id)} className="add-to-cart-button">Добавить в корзину
+              </button>
+            </div>
+            <p className="item-dates">
+              Создано: {new Date(currentItem.createdAt).toLocaleDateString()} |
+              Обновлено: {new Date(currentItem.updatedAt).toLocaleDateString()}
+            </p>
+          </div>
+        </div>
+        <div className="share-section">
+          <h2>Поделиться</h2>
+          <SendEmailForm url={currentItem.thumbnailUrl} itemName={currentItem.title}/>
         </div>
       </div>
-    </div>
   );
 };
+
 
 export default DigitalItemDetailsPage;

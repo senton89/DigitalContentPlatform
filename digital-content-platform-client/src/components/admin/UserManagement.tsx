@@ -60,18 +60,18 @@ const UserManagement: React.FC = () => {
 
     return (
         <div className="user-management">
-            <h1>User Management</h1>
+            <h1>Управление пользователями</h1>
             
             <div className="users-table-container">
                 <table className="users-table">
                     <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Created At</th>
-                            <th>Last Login</th>
-                            <th>Actions</th>
+                            <th>Имя пользователя</th>
+                            <th>Электронная почта</th>
+                            <th>Роль</th>
+                            <th>Дата создания</th>
+                            <th>Последний вход</th>
+                            <th>Действия</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,9 +85,9 @@ const UserManagement: React.FC = () => {
                                             value={selectedRole} 
                                             onChange={(e) => setSelectedRole(e.target.value)}
                                         >
-                                            <option value="User">User</option>
-                                            <option value="Creator">Creator</option>
-                                            <option value="Admin">Admin</option>
+                                            <option value="User">Пользователь</option>
+                                            <option value="Creator">Создатель</option>
+                                            <option value="Admin">Администратор</option>
                                         </select>
                                     ) : (
                                         user.role
@@ -97,7 +97,7 @@ const UserManagement: React.FC = () => {
                                 <td>
                                     {user.lastLogin 
                                         ? new Date(user.lastLogin).toLocaleDateString() 
-                                        : 'Never'
+                                        : 'Никогда'
                                     }
                                 </td>
                                 <td>
@@ -106,31 +106,31 @@ const UserManagement: React.FC = () => {
                                             onClick={() => handleRoleUpdate(user.id)}
                                             className="save-button"
                                         >
-                                            Save
+                                            Сохранить
                                         </button>
                                     ) : (
                                         <button 
                                             onClick={() => handleRoleChange(user.id, user.role)}
                                             className="edit-button"
                                         >
-                                            Edit Role
+                                            Изменить роль
                                         </button>
                                     )}
                                     
                                     {confirmDelete === user.id ? (
                                         <div className="confirm-delete">
-                                            <span>Are you sure?</span>
+                                            <span>Вы уверены?</span>
                                             <button 
                                                 onClick={() => handleDeleteUser(user.id)}
                                                 className="confirm-yes"
                                             >
-                                                Yes
+                                                Да
                                             </button>
                                             <button 
                                                 onClick={() => setConfirmDelete(null)}
                                                 className="confirm-no"
                                             >
-                                                No
+                                                Нет
                                             </button>
                                         </div>
                                     ) : (
@@ -138,7 +138,7 @@ const UserManagement: React.FC = () => {
                                             onClick={() => handleDeleteConfirm(user.id)}
                                             className="delete-button"
                                         >
-                                            Delete
+                                            Удалить
                                         </button>
                                     )}
                                 </td>
@@ -155,21 +155,22 @@ const UserManagement: React.FC = () => {
                         disabled={page === 1}
                         className="pagination-button"
                     >
-                        Previous
+                        Назад
                     </button>
                     <span className="pagination-info">
-                        Page {page} of {users.totalPages}
+                        Страница {page} из {users.totalPages}
                     </span>
                     <button 
                         onClick={() => handlePageChange(page + 1)} 
                         disabled={page === users.totalPages}
                         className="pagination-button"
                     >
-                        Next
+                        Вперед
                     </button>
                 </div>
             )}
         </div>
+
     );
 };
 

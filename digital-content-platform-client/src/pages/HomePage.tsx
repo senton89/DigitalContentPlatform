@@ -6,29 +6,30 @@ import './HomePage.css';
 const HomePage: React.FC = () => {
     return (
         <div className="home-page">
-            <div className="hero-section">
-                <h1>Welcome to Digital Content Platform</h1>
-                <p>Discover, buy, and manage digital content with ease</p>
-                <div className="hero-actions">
-                    <Link to="/catalog" className="browse-button">Browse Catalog</Link>
-                    <Link to="/register" className="register-button">Join Now</Link>
-                </div>
+        <div className="hero-section">
+            <h1>Добро пожаловать на платформу цифрового контента</h1>
+            <p>Открывайте, покупайте и управляйте цифровым контентом с легкостью</p>
+            <div className="hero-actions">
+                <Link to="/catalog" className="browse-button">Просмотреть каталог</Link>
+                <Link to="/register" className="register-button">Присоединиться</Link>
             </div>
+        </div>
 
-            <div className="features-section">
-                <div className="feature">
-                    <h2>Wide Selection</h2>
-                    <p>Access thousands of digital items across multiple categories</p>
-                </div>
-                <div className="feature">
-                    <h2>Secure Transactions</h2>
-                    <p>Buy and sell with confidence using our secure platform</p>
-                </div>
-                <div className="feature">
-                    <h2>Creator Tools</h2>
-                    <p>Powerful tools for content creators to manage and sell their work</p>
-                </div>
+        <div className="features-section">
+            <div className="feature">
+                <h2>Широкий выбор</h2>
+                <p>Доступ к тысячам цифровых товаров в различных категориях</p>
             </div>
+            <div className="feature">
+                <h2>Безопасные транзакции</h2>
+                <p>Покупайте и продавайте с уверенностью, используя нашу безопасную платформу</p>
+            </div>
+            <div className="feature">
+                <h2>Инструменты для создателей</h2>
+                <p>Мощные инструменты для создателей контента для управления и продажи своих работ</p>
+            </div>
+        </div>
+
         </div>
     );
 };

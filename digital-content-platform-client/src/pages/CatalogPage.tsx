@@ -49,12 +49,12 @@ const CatalogPage: React.FC = () => {
         });
   };
 
-  if (loading) return <div className="loading">Loading catalog...</div>;
-  if (error) return <div className="error">Error: {error}</div>;
+  if (loading) return <div className="loading">Загрузка каталога...</div>;
+  if (error) return <div className="error">Ошибка: {error}</div>;
 
   return (
     <div className="catalog-page">
-      <h1>Digital Content Catalog</h1>
+      <h1>Каталог цифрового контента</h1>
       { items && items.items.length > 0 ? (
         <div className="catalog-grid">
           {items.items.map((item) => (
@@ -63,8 +63,8 @@ const CatalogPage: React.FC = () => {
         </div>
       ) : (
         <div className="empty-catalog">
-          <p>No items found in the catalog.</p>
-          <button onClick={() => navigate('/create-item')}>Add Your Content</button>
+          <p>В каталоге нет товаров.</p>
+          <button onClick={() => navigate('/create-item')}>Добавить ваш контент</button>
         </div>
       )}
 
@@ -75,22 +75,23 @@ const CatalogPage: React.FC = () => {
             disabled={page === 1}
             className="pagination-button"
           >
-            Previous
+            Назад
           </button>
           <span className="pagination-info">
-            Page {page} of {items.totalPages}
+            Страница {page} из {items.totalPages}
           </span>
           <button
             onClick={() => handlePageChange(page + 1)}
             disabled={page === items.totalPages}
             className="pagination-button"
           >
-            Next
+            Вперед
           </button>
         </div>
       )}
     </div>
   );
 };
+
 
 export default CatalogPage;
