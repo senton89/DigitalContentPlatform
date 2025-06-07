@@ -41,11 +41,11 @@ const Header: React.FC = () => {
                     <ul>
                         <li><Link to="/">Главная</Link></li>
                         <li><Link to="/catalog">Каталог</Link></li>
-                        <li><Link to="/shared" style={{marginRight: '-20px'}}>Общий контент</Link></li>
+                        <li><Link to="/shared">Общий контент</Link></li>
                         {isAuthenticated ? (
                             <>
-                                <li><Link to="/upload" style={{marginRight: '-50px'}}>Загрузить контент</Link></li>
-                                <li><Link to="/profile" style={{marginLeft: '20px'}}>Профиль</Link></li>
+                                <li><Link to="/upload">Загрузить контент</Link></li>
+                                <li><Link to="/profile">Профиль</Link></li>
                                 {user?.role === 'Admin' && (
                                     <li><Link to="/admin">Админ</Link></li>
                                 )}

@@ -31,6 +31,7 @@ const SharedContentCard: React.FC<SharedContentCardProps> = ({ item }) => {
         <div className="content-card">
             <div className="content-icon">{getIcon()}</div>
             <h3>{item.title}</h3>
+            <img src={item.url} alt={item.title} className="content-image" style={{ maxWidth: '120px', height: '120px' }} />
             <p>{item.description || 'Описание отсутствует'}</p>
             <p className="type"><strong>Тип:</strong> {item.contentType}</p>
             <Link to={`/shared/${item.id}`}>Подробнее →</Link>

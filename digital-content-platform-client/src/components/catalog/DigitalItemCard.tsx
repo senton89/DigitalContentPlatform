@@ -25,24 +25,27 @@ const DigitalItemCard: React.FC<DigitalItemCardProps> = React.memo(({ item, onAd
 
   return (
     <div className="digital-item-card">
-      <img src={item.thumbnailUrl} alt={item.title} className="item-thumbnail" />
-      <div className="item-details">
-        <h3>{item.title}</h3>
+      <div className="card-thumbnail-container">
+        <img src={item.thumbnailUrl} alt={item.title} className="item-thumbnail" />
+      </div>
+      <div className="card-body">
+        <h3 className="item-title">{item.title}</h3>
         <p className="item-description">{item.description.slice(0, 100)}...</p>
-        <p className="item-price">${item.price.toFixed(2)}</p>
-        <p className="item-creator">By: {item.creatorUsername}</p>
-        <div className="item-actions">
-          <button onClick={handleViewDetails} className="view-details-button">
-            Подробнее
+        <p className="item-price">₽{item.price.toFixed(2)}</p>
+        <p className="item-author">Автор: {item.creatorUsername}</p>
+      </div>
+      <div className="card-footer">
+        <button onClick={handleViewDetails} className="btn btn-details">
+          Подробнее
+        </button>
+        {onAddToCart && (
+          <button onClick={handleAddToCart} className="btn btn-add-to-cart">
+            Добавить в корзину
           </button>
-          {onAddToCart && (
-            <button onClick={handleAddToCart} className="add-to-cart-button">
-              Добавить в корзину
-            </button>
-          )}
-
-          <ShareButtons url={shareUrl} title={item.title} />
-        </div>
+        )}
+      </div>
+      <div className="card-share">
+        <ShareButtons url={shareUrl} title={item.title} />
       </div>
     </div>
   );

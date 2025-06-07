@@ -62,7 +62,7 @@ const DigitalItemDetailsPage: React.FC = () => {
             <h1>{currentItem.title}</h1>
             <p className="item-category">Категория: {currentItem.categoryName}</p>
             <p className="item-creator">Автор: {currentItem.creatorUsername}</p>
-            <p className="item-price">${currentItem.price.toFixed(2)}</p>
+            <p className="item-price">₽{currentItem.price.toFixed(2)}</p>
             <p className="item-description">{currentItem.description}</p>
             <div className="item-actions">
               <button onClick={() => handleAddToCart(currentItem.id)} className="add-to-cart-button">Добавить в корзину

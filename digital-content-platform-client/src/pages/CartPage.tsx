@@ -88,7 +88,7 @@ const CartPage: React.FC = () => {
                                             Добавлено: {new Date(item.addedAt).toLocaleDateString()}
                                         </p>
                                     </div>
-                                    <div className="item-price">${item.price.toFixed(2)}</div>
+                                    <div className="item-price">₽{item.price.toFixed(2)}</div>
                                     <div className="item-actions">
                                         <button
                                             onClick={() => handleRemoveItem(item.id)}
@@ -108,7 +108,7 @@ const CartPage: React.FC = () => {
                             </div>
                             <div className="summary-row total">
                                 <span>Итого:</span>
-                                <span>${cart.totalPrice.toFixed(2)}</span>
+                                <span>₽{cart.totalPrice.toFixed(2)}</span>
                             </div>
                             <button onClick={handleCheckout} className="checkout-button">
                                 Оформить заказ

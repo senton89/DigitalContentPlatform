@@ -1,50 +1,111 @@
 .digital-item-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: box-shadow 0.3s ease-in-out;
-  background-color: #fff;
-  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 320px;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .digital-item-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.digital-item-card img {
+.card-thumbnail-container {
+  position: relative;
   width: 100%;
   height: 180px;
+  overflow: hidden;
+}
+
+.item-thumbnail {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  display: block;
+  transition: transform 0.4s ease;
 }
 
-.digital-item-card h3 {
+.card-thumbnail-container:hover .item-thumbnail {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 1rem;
+  flex-grow: 1;
+}
+
+.item-title {
   font-size: 1.1rem;
-  margin: 0.75rem;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 0.5rem;
 }
 
-.digital-item-card p {
+.item-description {
   font-size: 0.9rem;
-  padding: 0 0.75rem;
-  margin: 0;
+  color: #555;
+  margin-bottom: 0.75rem;
+  min-height: 48px;
 }
 
-.digital-item-card .price {
+.item-price {
+  font-size: 1rem;
   font-weight: bold;
   color: #007bff;
-  margin: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
-.digital-item-card a {
-  display: inline-block;
-  margin: 0.75rem;
-  color: #007bff;
-  text-decoration: none;
+.item-author {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 1rem;
 }
 
-.digital-item-card .share-buttons {
-  padding: 0.75rem;
+.card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem 0.5rem 1rem;
+}
+
+.btn {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-details {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-details:hover {
+  background-color: #0056b3;
+}
+
+.btn-add-to-cart {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  border: 1px solid #bbdefb;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #bbdefb;
+}
+
+.card-share {
+  padding: 0 1rem 1rem 1rem;
   border-top: 1px solid #eee;
 }
